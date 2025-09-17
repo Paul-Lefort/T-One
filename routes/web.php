@@ -1,0 +1,99 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
+Route::get('/login', function () {
+    //la page de connection.
+    return ('Page de login !');
+});
+
+Route::get('/login/passwordForgot', function () {
+    //la page de connection.
+    return ('Page de mot de passe oublier !');
+});
+
+Route::get('/login/2AF', function () {
+    //la double authentification
+    return ('Page de verification de double authentification');
+});
+
+Route::get('/account/view/{idAccount}', function ($idAccount) {
+    return ('Vous visionnez le compte numéro : '. $idAccount);
+}) -> where('idAccount', '[0-9]+');
+
+Route::get('/account/{action}/{amount}', function ($action = NULL, $amount = 0) {
+    //action est un crédit ou un debit
+    //amount est le montant qui concerne cette transaction
+    return 'Vous allez faire un ' . $action . ' de ' . $amount;
+})->where([
+    'action' => 'credit|debit',
+    'amount' => '[0-9]+'
+]);
+
+
+Route::get('/account/virement/{idAccount}', function ($idAccount = NULL) {
+    //le virement concerne deux personnes on met juste l'id de la personne 
+    return ('vous allez faire un virement vers le compte : '. $idAccount);
+}) -> where('idAccount', '[0-9]+');
+
+
+Route::get('/account/profile', function () {
+    return ('welcome');
+});
+
+Route::get('/account/changePassword', function () {
+    return ('welcome');
+});
+
+Route::get('/manage/{action}/{idAccount}', function ($action = NULL, $idAccount = NULL) {
+    //action : regarder un compte, gele un compte ou le degeler
+    //idAccount : cible un compte en particulier
+    return ('Vous allez effectuer un "'. $action .'" sur le compte : '.$idAccount);
+})->where([
+    'action' => 'view|freeze|unfreeze',
+    'idAccount' => '[0-9]+'
+]);
+
+Route::get('/manage/reviewLoan/{idClient}', function ($idClient) {
+    return ('Voici la simulation de pret pour le client : '. $idClient);
+}) -> where('idClient', '[0-9]+');
+
+
+Route::get('/manage/ClientFolder/{action}', function () {
+    //action : view (visionnage dossier client), create (creer un nouveau dossier client)
+    return ('vous allez creer ou visionnez un dossier client');
+})->where(['action' => 'view|create|']);
+
+Route::get('/admin/{action}/{idUser}', function ($action = NULL, $idUser = NULL) {
+    //action : gestion des acces (bloquer/debloquer, creer, supprimer)
+    //idUser : id propre a chaque compte que ce soit client ou staff
+    return ("vous allez effectuer l'action de ". $action . ' sur le compte '. $idUser);
+})->where([
+    'action' => 'lock|unlock|block|unblock|create|delete',
+    'idUser' => '[0-9]+'
+]);
+
+Route::get('/flux/{action}', function ($action = NULL) {
+    //affiche une liste de toute les actions (credit, depot, virement)
+    return ('vous allez visionner le flux des : '. $action);
+})->where(['action' => 'credit|depot|virement']);
+
+Route::get('/manage/viewAlerts', function () {
+    return view('welcome');
+});
