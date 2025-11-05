@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OperationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,14 +38,26 @@ Route::get('/account/view/{idAccount}', function ($idAccount) {
     return ('Vous visionnez le compte numéro : '. $idAccount);
 }) -> where('idAccount', '[0-9]+');
 
-Route::get('/account/{action}/{amount}', function ($action = NULL, $amount = 0) {
-    //action est un crédit ou un debit
-    //amount est le montant qui concerne cette transaction
-    return 'Vous allez faire un ' . $action . ' de ' . $amount;
+
+Route::get('/account/{action}/{amount}/{idCompte}', function ($action, $amount, $idCompte) {
+
+    $operationController = new OperationController();
+
+    switch ($action) {
+        case 'credit':
+            return $operationController->credit($amount, $idCompte);
+        case 'debit':
+            return $operationController->debit($amount, $idCompte);
+        default:
+            return "Action invalide. Utilisez 'credit' ou 'debit'.";
+    }
+
 })->where([
     'action' => 'credit|debit',
-    'amount' => '[0-9]+'
+    'amount' => '[0-9]+',
+    'idCompte' => '[0-9]+'
 ]);
+
 
 
 Route::get('/account/virement/{idAccount}', function ($idAccount = NULL) {

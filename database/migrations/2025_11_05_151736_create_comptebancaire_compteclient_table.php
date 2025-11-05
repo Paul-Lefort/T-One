@@ -16,12 +16,14 @@ return new class extends Migration
             $table->foreign('idClient')
                   ->references( 'id' )  
                   ->on('compte_clients')
+                  ->nullable()
                   ->onDelete( 'cascade' );
 
             $table->unsignedBigInteger( 'idCompteBancaire' );
             $table->foreign( 'idCompteBancaire' )
                   ->references( 'id' )
                   ->on( 'compte_bancaires' )
+                  ->nullable()
                   ->onDelete( 'cascade' );
 
             $table->primary( [ 'idClient', 'idCompteBancaire' ] );
