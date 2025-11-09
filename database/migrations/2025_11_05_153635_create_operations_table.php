@@ -16,21 +16,22 @@ return new class extends Migration
 
             $table->String( 'typeOperation' );
 
-            $table->dateTime('dateOuverture');
+            $table->dateTime('dateOperation');
 
-            $table->decimal('solde', 15, 2);
+            $table->decimal('montant', 15, 2);
             
-            $table->unsignedBigInteger( 'compteDebite' );
-            $table->foreign( 'compteDebite' )
-                  ->references('id')
-                  ->on('compte_bancaires')
-                  ->onDelete( 'cascade' );
+            $table->unsignedBigInteger('compteDebite')->nullable();
+            $table->foreign('compteDebite')
+                ->references('id')
+                ->on('compte_bancaires')
+                ->onDelete('cascade');
 
-            $table->unsignedBigInteger( 'compteCredite' );
-            $table->foreign( 'compteCredite' )
-                  ->references('id')
-                  ->on('compte_bancaires')
-                  ->onDelete( 'cascade' );
+            $table->unsignedBigInteger('compteCredite')->nullable();
+            $table->foreign('compteCredite')
+                ->references('id')
+                ->on('compte_bancaires')
+                ->onDelete('cascade');
+
 
         });
     }

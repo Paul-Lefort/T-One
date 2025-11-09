@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); 
             
             $table->unsignedBigInteger('numeroClient'); 
-            $table->integer('montant');
+            $table->integer('solde');
             $table->string('typeDeCompte');
             $table->date('dateOuverture'); 
             
