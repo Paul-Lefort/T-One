@@ -10,12 +10,13 @@ class Operation extends Model
     use HasFactory;
     
     public $timestamps = false;
-
+    protected $table = 'operations';
     protected $fillable = [
-        'typeOperation',   // C, D, V
-        'dateOperation',   // date de l'opération
+        'typeOperation',   
+        'dateOperation',   
         'montant',
         'compteDebite',
         'compteCredite',
     ];
 }
+

@@ -12,6 +12,38 @@ use Illuminate\Support\Facades\Log;
 
 class OperationController extends Controller
 {
+
+    public function getOperation($idCompte, $typeOperation = null){
+
+        try {
+
+            $query = DB::table('operations')
+                ->where(function ($query) use ($idCompte) {
+                    $query->where('compteDebite', $idCompte)
+                        ->orWhere('compteCredite', $idCompte);
+                });
+
+            if ($typeOperation) {
+                $query->where('typeOperation', $typeOperation);
+            }
+
+            $operations = $query->get();
+
+            Log::info("résumé de l'historique du compte : $idCompte recupérer");
+            return response()->json($operations);
+
+        } catch (\Throwable $th) {
+            Log::error("Erreur lors du crédit", [
+            'idCompte' => $idCompte,
+            'message' => $th->getMessage(),
+            'trace' => $th->getTraceAsString()
+            ]);
+
+            return "une erreur est survenu";
+        }
+
+    }
+
     public function credit($somme, $idCompteACrediter){
         //on vérifie que la somme est supérieur à 0.
         if($somme <= 0){

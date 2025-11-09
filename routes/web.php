@@ -58,6 +58,7 @@ Route::get('/account/{action}/{amount}/{idCompte}', function ($action, $amount, 
     'idCompte' => '[0-9]+'
 ]);
 
+Route::get('/operations/{idCompte}/{typeOperation?}', [OperationController::class, 'getOperation']);
 
 
 Route::get('/account/virement/{idAccount}', function ($idAccount = NULL) {
