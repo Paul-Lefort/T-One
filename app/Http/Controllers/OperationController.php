@@ -27,23 +27,29 @@ class OperationController extends Controller
                 $query->where('typeOperation', $typeOperation);
             }
 
-            $operations = $query->get();
+            $operations = $query
+                ->orderBy('dateOperation', 'desc')
+                ->limit(200) 
+                ->get();
 
-            Log::info("résumé de l'historique du compte : $idCompte recupérer");
-            return response()->json($operations);
-
-        } catch (\Throwable $th) {
-            Log::error("Erreur lors du crédit", [
-            'idCompte' => $idCompte,
-            'message' => $th->getMessage(),
-            'trace' => $th->getTraceAsString()
+            Log::info("Résumé de l'historique du compte : $idCompte récupéré", [
+                'nombre_operations' => $operations->count()
             ]);
 
-            return "une erreur est survenu";
+                return view('historique', compact('operations'));
+
+        } catch (\Throwable $th) {
+            Log::error("Erreur lors de la récupération de l'historique", [
+                'idCompte' => $idCompte,
+                'message' => $th->getMessage(),
+                'trace' => $th->getTraceAsString()
+            ]);
+
+            return back()->with('error', 'Une erreur est survenue lors de la récupération de l\'historique');
         }
 
     }
-
+    
     public function credit($somme, $idCompteACrediter){
         //on vérifie que la somme est supérieur à 0.
         if($somme <= 0){
@@ -91,7 +97,7 @@ class OperationController extends Controller
             return "une erreur est survenu";
         }
     }
-
+    
     public function debit($somme, $idCompteADebiter){
 
         //on charge le compte à debiter

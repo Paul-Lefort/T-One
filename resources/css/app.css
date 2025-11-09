@@ -1,0 +1,176 @@
+/*
+|--------------------------------------------------------------------------
+| Styles Globaux de l'Application Bancaire (Noir & Gris)
+|--------------------------------------------------------------------------
+*/
+
+:root {
+    --color-primary: #353535; 
+    --color-secondary: #007bff; 
+    --color-background: #ffffff; 
+    --color-surface: #f7f7f7; 
+    --color-text-dark: #1a1a1a;
+    --color-text-light: #ffffff;
+    --color-border: #dddddd; 
+
+    --font-stack: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* --- Général --- */
+body {
+    font-family: var(--font-stack);
+    background-color: var(--color-background);
+    color: var(--color-text-dark);
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+main {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 75vh;
+}
+
+h2 {
+    color: var(--color-text-dark);
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 15px;
+    margin-bottom: 40px;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+/* --- Header et Logo --- */
+.main-header {
+    background-color: var(--color-primary); 
+    box-shadow: 0 4px 10px rgba(55, 55, 55, 0.132);
+    color: var(--color-text-light);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.logo i {
+    color: var(--color-secondary);
+    margin-right: 8px;
+}
+
+/* --- Solde du Compte (Visibilité Clé) --- */
+.solde-compte {
+    background-color: var(--color-surface);
+    color: var(--color-text-dark);
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.95em;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border: 1px solid #e5e5e5;
+}
+
+.montant-solde {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: #009966;
+}
+
+.main-nav {
+    background-color: #333333;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    }
+
+.main-nav ul li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px; 
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-size: 0.85em;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+    height: 100%; 
+    justify-content: center;
+}
+
+.main-nav ul li a i {
+    font-size: 1.2em;
+    margin-bottom: 3px; 
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    background-color: #333333; 
+    color: var(--color-secondary);
+    padding: 0 15px; 
+}
+
+
+/* --- Footer --- */
+footer {
+    background-color: var(--color-primary);
+    color: #aaaaaa;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+    margin: 0 5px;
+}
+
+footer a:hover {
+    color: var(--color-secondary);
+}
+
+/* --- Media Queries pour la Responsivité --- */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column; 
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .main-nav ul {
+        justify-content: space-around;
+        flex-wrap: wrap;
+        width: 100%; 
+    }
+    .main-nav ul li a {
+        padding: 10px 5px;
+        font-size: 0.7em;
+    }
+    .main-nav ul li a:hover,
+    .main-nav ul li a.active {
+         padding: 10px 5px;
+    }
+    .solde-compte {
+        width: 100%;
+        justify-content: center;
+    }
+    main {
+        padding: 20px 10px;
+    }
+}
