@@ -24,6 +24,16 @@ Route::get('/login', function () {
     return ('Page de login !');
 });
 
+use App\Http\Controllers\ajoutclientcontroller;
+
+Route::get('/account/add',[AjoutClientController::class,'showform']);
+
+Route::post('/account/add', [AjoutClientController::class, 'ajoutclient', function(){
+    return view('ajoutclient');
+}]);
+
+
+
 Route::get('/login/passwordForgot', function () {
     //la page de connection.
     return ('Page de mot de passe oublier !');
@@ -37,6 +47,11 @@ Route::get('/login/2AF', function () {
 Route::get('/account/view/{idAccount}', function ($idAccount) {
     return ('Vous visionnez le compte numéro : '. $idAccount);
 }) -> where('idAccount', '[0-9]+');
+
+
+use App\Http\Controllers\ClientController;
+Route::get('/account/view/{idAccount}', [ClientController::class, 'informationCompte']);
+
 
 
 Route::get('/account/{action}/{amount}/{idCompte}', function ($action, $amount, $idCompte) {
