@@ -86,6 +86,10 @@ Route::get('/account/profile', function () {
     return ('welcome');
 });
 
+Route::get('/account/changeInformations', function (){
+    return ('welcome');
+});
+
 Route::get('/account/changePassword', function () {
     return ('welcome');
 });

@@ -11,7 +11,6 @@
     @stack('styles')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJd4n0U6UFLs/1h6p0eP3d3n0x0h5b6q6d/Q4q0eB7p3v9qjP8O7N0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     </head>
 
 <body>
