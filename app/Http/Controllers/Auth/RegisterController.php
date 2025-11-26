@@ -33,7 +33,6 @@ class RegisterController extends Controller
         $numero = $this->generateUniqueNumero(10);
 
         $user = User::create([
-            'name' => $validated['name'],
             'numero' => $numero,
             'password' => Hash::make($validated['password']),
         ]);
@@ -41,7 +40,6 @@ class RegisterController extends Controller
         Auth::login($user);
 
         session()->put('id', $user->id);
-        session()->put('name', $user->name);
         // On retourne le numéro généré en flash pour l'afficher côté client si besoin
         return redirect('/')->with('generated_numero', $numero);
     }
