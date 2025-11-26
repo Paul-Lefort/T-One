@@ -65,7 +65,7 @@ $operationsParMois = $operationsParMois->sortKeysDesc();
                         $prefix = '';
                         $color = 'virement';
                     } else {
-                        $prefix = $isCredit ? '+' : '' ;
+                        $prefix = $isCredit ? '+' : '-';
                         $color = $isCredit ? 'credit' : 'debit';
                     }
                     

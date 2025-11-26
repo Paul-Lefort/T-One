@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OperationController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,21 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Routes d'authentification
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/login', function () {
-    //la page de connection.
-    return ('Page de login !');
-});
-
-Route::get('/login/passwordForgot', function () {
-    //la page de connection.
-    return ('Page de mot de passe oublier !');
-});
-
-Route::get('/login/2AF', function () {
-    //la double authentification
-    return ('Page de verification de double authentification');
-});
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/account/view/{idAccount}', function ($idAccount) {
     return ('Vous visionnez le compte numéro : '. $idAccount);
@@ -53,9 +47,21 @@ Route::get('/account/{action}/{amount}/{idCompte}', function ($action, $amount, 
     }
 
 })->where([
-    'action' => 'credit|debit',
+    'action' => 'credit|debit|virement',
     'amount' => '[0-9]+',
     'idCompte' => '[0-9]+'
+]);
+
+Route::get('/account/virement/{amount}/{idCompteSource}/{idCompteDest}', function ($somme, $idCompteADebiter, $idCompteACrediter) {
+
+    $operationController = new OperationController();
+    // Assurez-vous d'avoir une méthode 'transfert' dans OperationController
+    return $operationController->virement($somme, $idCompteADebiter, $idCompteACrediter);
+
+})->where([
+    'amount' => '[0-9]+',
+    'idCompteSource' => '[0-9]+',
+    'idCompteDest' => '[0-9]+'
 ]);
 
 Route::get('/operations/{idCompte}/{typeOperation?}', [OperationController::class, 'getOperation']);

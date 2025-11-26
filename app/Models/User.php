@@ -13,13 +13,22 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * The column used for authentication (numero instead of email)
+     *
+     * @var string
+     */
+    protected $authenticationColumn = 'numero';
+    protected $authenticationStatus = 'status';
+
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
         'name',
-        'email',
+        'numero',
         'password',
     ];
 
