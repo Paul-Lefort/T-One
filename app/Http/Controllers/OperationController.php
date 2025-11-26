@@ -144,7 +144,7 @@ class OperationController extends Controller
 
     }
 
-    public function virement ($somme, $idCompteADebiter, $idCompteACrediter){
+    public function virement($somme, $idCompteADebiter, $idCompteACrediter){
         
         //on charge les deux comptes bancaires.
         $compteADebiter = CompteBancaire::find($idCompteADebiter);
@@ -200,4 +200,5 @@ class OperationController extends Controller
             return "une erreur est survenu";
         }
     }
+
 }
