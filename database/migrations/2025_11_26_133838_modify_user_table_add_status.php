@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // Ajouter la colonne numero
-            $table->integer('status')->after('id')->defaukt(1);
+            $table->integer('status')->after('id')->default(1);
             // Supprimer les colonnes email et email_verified_at
             $table->dropColumn('name');
         });
